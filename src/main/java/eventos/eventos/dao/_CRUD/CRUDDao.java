@@ -1,4 +1,9 @@
 package eventos.eventos.dao._CRUD;
 
-public interface CRUDRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.NoRepositoryBean;
+
+@NoRepositoryBean
+public interface CRUDDao<T> extends JpaRepository<T, Long> {
+
 }

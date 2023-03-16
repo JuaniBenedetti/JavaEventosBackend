@@ -1,8 +1,9 @@
-package eventos.eventos.dao.rol;
+package eventos.eventos.dao.rolUsuario;
 
-import eventos.eventos.Model.enums.Rol;
+import eventos.eventos.model.RolUsuario;
+import eventos.eventos.model.enums.Rol;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface RolDao extends JpaRepository<Rol, Long> {
-
+public interface RolUsuarioDao extends JpaRepository<RolUsuario, Long> {
+    Boolean existsByNombre(Rol rol);
 }
