@@ -1,8 +1,8 @@
-package eventos.eventos.services.rolUsuarioDao;
+package eventos.eventos.services.rolUsuario;
 
+import eventos.eventos.dao.rolUsuario.RolUsuarioDao;
 import eventos.eventos.model.RolUsuario;
 import eventos.eventos.model.enums.Rol;
-import eventos.eventos.dao.rolUsuario.RolUsuarioDao;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,10 +41,9 @@ public class rolUsuarioServiceImpl implements rolUsuarioService {
         } catch (InvalidDataAccessApiUsageException exception) {
             log.warn("\u001B[38;2;255;255;255m" +
                     "\u001B[48;2;252;127;0m" +
-                    "########## ATENCION: EXISTEN REGISTROS DE ROLES QUE NO SE ENCUENTRAN EN EL ENUM ##########" +
+                    "########## ATENCION: EXISTEN REGISTROS DE ROLES QUE NO SE ENCUENTRAN EN EL ENUM LOCAL ##########" +
                     "\u001B[0m"
             );
         }
-
     }
 }

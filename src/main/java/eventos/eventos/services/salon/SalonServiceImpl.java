@@ -1,47 +1,16 @@
 package eventos.eventos.services.salon;
 
-import eventos.eventos.model.Salon;
 import eventos.eventos.dao.salon.SalonDao;
+import eventos.eventos.model.Evento;
+import eventos.eventos.model.Salon;
+import eventos.eventos.services._CRUD.CRUDServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import javassist.NotFoundException;
-
 
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
-@Transactional
-public class SalonServiceImpl implements SalonService {
+public class SalonServiceImpl extends CRUDServiceImpl<Salon> implements SalonService {
 
-    private final SalonDao salaDao;
-
-    @Override
-    public List<Salon> findSalones(){
-        return salaDao.findAll();
-    }
-
-    @Override
-    public Salon findSalonById(long id) {return salaDao.findById(id).get();}
-
-    @Override
-    public Salon saveSalon(Salon salon) throws Exception{
-        return salaDao.save(salon);
-    }
-    @Override
-    public Salon updateSalon(Salon salon) throws  Exception{
-
-        Salon salonDB = salaDao.findById(salon.getIdSalon())
-                .orElseThrow(() -> new NotFoundException("No existe el salon"));
-
-        return salaDao.save(salon);
-    }
-
-    @Override
-    public void deleteById(long id) throws Exception {
-        Salon salonDB = salaDao.findById(id)
-                .orElseThrow(() -> new NotFoundException("No existe el salon"));
-        salaDao.deleteById(id);
-    }
+    public SalonServiceImpl(SalonDao salonDao) { super(salonDao); }
 }

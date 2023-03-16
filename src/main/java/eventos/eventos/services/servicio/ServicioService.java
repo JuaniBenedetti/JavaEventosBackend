@@ -1,18 +1,8 @@
 package eventos.eventos.services.servicio;
 
 import eventos.eventos.model.Servicio;
+import eventos.eventos.services._CRUD.CRUDService;
 
-import java.util.List;
+public interface ServicioService extends CRUDService<Servicio> {
 
-public interface ServicioService {
-
-    Servicio findServicio(Long idServicio) throws Exception;
-
-    Servicio saveServicio(Servicio servicio) throws Exception;
-
-    Servicio updateServicio(Servicio servicio) throws Exception;
-
-    void deleteServicio(Servicio servicio) throws Exception;
-
-    List<Servicio> findAllServicio() throws Exception;
 }

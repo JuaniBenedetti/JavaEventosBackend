@@ -1,37 +1,36 @@
-package eventos.eventos.Model;
+package eventos.eventos.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.sun.istack.NotNull;
+import eventos.eventos.model.enums.TipoDocumento;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
-@MappedSuperclass
 @Data
-// @Table(name ="usuarios")
-//@JsonIdentityInfo(generator= ObjectIdGenerators.UUIDGenerator.class, property="@Id")
-public abstract class Usuario {
+@MappedSuperclass
+@NoArgsConstructor
+public abstract class Persona {
+
     @Id
-    @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idUsuario;
+    private Long idPersona;
 
-    @Column
-    private String tipoDocumento;
+    @NotNull
+    @Column(name = "tipo_documento", nullable = false, length = 10)
+    @Enumerated(EnumType.STRING)
+    private TipoDocumento tipoDocumento;
 
-    @Column
+    @NotNull
+    @Column(name="nro_documento", nullable = false, length = 15)
     private String nroDocumento;
 
-    @Column
     private String apellido;
 
-    @Column
     private String nombre;
 
-    @Column
-    private String mail;
+    private LocalDate fechaNacimiento;
 
-    @Column
     private String telefono;
-
 }

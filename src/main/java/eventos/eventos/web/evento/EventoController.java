@@ -1,14 +1,8 @@
-package eventos.eventos.Web.evento;
+package eventos.eventos.web.evento;
 
-import eventos.eventos.Model.Evento;
-import org.springframework.web.bind.annotation.PathVariable;
+import eventos.eventos.model.Evento;
+import eventos.eventos.web._CRUD.CRUDController;
 
-import java.util.List;
+public interface EventoController extends CRUDController<Evento> {
 
-public interface EventoController {
-    List<Evento> getEventos() throws Exception;
-
-    Evento getEventosById( long id) throws Exception;
-
-    Evento newEvento(Evento evento)throws Exception;
 }

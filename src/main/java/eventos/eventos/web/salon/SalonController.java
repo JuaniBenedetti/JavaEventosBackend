@@ -1,11 +1,10 @@
-package eventos.eventos.Web.salon;
+package eventos.eventos.web.salon;
 
-import eventos.eventos.Model.Salon;
+import eventos.eventos.model.Salon;
+import eventos.eventos.web._CRUD.CRUDController;
 
 import java.util.List;
 
-public interface SalonController {
-    List<Salon> getSalones() throws Exception;
+public interface SalonController extends CRUDController<Salon> {
 
-    Salon getSalon(long id) throws Exception;
 }

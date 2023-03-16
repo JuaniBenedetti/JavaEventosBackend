@@ -1,61 +1,63 @@
-package eventos.eventos.Model;
+package eventos.eventos.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.util.List;
+import java.time.ZonedDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
-@Builder
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
+@NoArgsConstructor
 @Table(name ="eventos")
-@JsonIdentityInfo(generator= ObjectIdGenerators.UUIDGenerator.class, property="@Id")
 public class Evento {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
-    private long nroReserva;
+    private Long nroReserva;
 
-    @Column
-    private LocalDate fechaReserva;
-    @Column
-    private LocalDate fechaEvento;
-    @Column
-    private int cantidadPersonas;
+    private ZonedDateTime fechaReserva;
 
-    //@JsonManagedReference
-    @ManyToOne
-    @JoinColumn(name = "idUsuario", nullable = false)
     @NotNull
-    private Cliente cliente ;// muchos eventos para un cliente
+    private ZonedDateTime fechaEvento;
 
-//    @ManyToOne
-//    @JoinColumn(name = "idTipoServicio", nullable = false)
-//    @NotNull
-//    private TipoServicio tipoServicio;
-
-    @ManyToOne
-    @JoinColumn(name = "idSalon", nullable = false)
     @NotNull
-    private Salon salon; // muchos eventos para una sala
+    private Integer cantidadPersonas;
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn(
+            name = "id_cliente",
+            nullable = false,
+            foreignKey = @ForeignKey(name = "FK_eventos_clientes")
+    )
+    private Cliente cliente ;
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn(
+            name = "id_salon",
+            nullable = false,
+            foreignKey = @ForeignKey(name = "FK_eventos_salones")
+    )
+    private Salon salon;
 
     @ManyToMany()
-    @JoinTable(name = "eventos_servicios",
-            joinColumns = @JoinColumn(name = "nroReserva", nullable = false),
-            inverseJoinColumns = @JoinColumn(name = "idServicio", nullable = false)
+    @JoinTable(
+            name = "eventos_servicios",
+            joinColumns = @JoinColumn(
+                    name = "nro_reserva", referencedColumnName = "nroReserva",
+                    nullable = false,
+                    foreignKey = @ForeignKey(name = "FK_eventos_servicios_eventos")
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "id_servicio", referencedColumnName = "idServicio",
+                    nullable = false,
+                    foreignKey = @ForeignKey(name = "FK_eventos_servicios_servicios")
+            )
     )
-    private List<Servicio> servicios;
-
+    private Set<Servicio> servicios = new HashSet<>();
 }

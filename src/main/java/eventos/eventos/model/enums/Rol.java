@@ -1,6 +1,7 @@
-package eventos.eventos.Model.enums;
+package eventos.eventos.model.enums;
 
-public enum Role {
+public enum Rol {
+    ROLE_ADMIN,
     ROLE_OWNER,
     ROLE_CLIENT
 }

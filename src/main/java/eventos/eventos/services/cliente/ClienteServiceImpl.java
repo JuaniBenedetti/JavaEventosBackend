@@ -1,39 +1,16 @@
 package eventos.eventos.services.cliente;
 
-import eventos.eventos.model.Cliente;
 import eventos.eventos.dao.cliente.ClienteDao;
+import eventos.eventos.model.Cliente;
+import eventos.eventos.services._CRUD.CRUDServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
 @Service
-@RequiredArgsConstructor
-@Transactional
-public class ClienteServiceImpl implements ClienteService{
+public class ClienteServiceImpl extends CRUDServiceImpl<Cliente> implements ClienteService{
 
-    private final ClienteDao clienteDao;
-
-    @Override
-    public List<Cliente> findClientes() throws Exception {
-        return clienteDao.findAll();
-    }
-    @Override
-    public Cliente findCliente(long id) throws Exception{
-        return clienteDao.findById(id).get();
-    }
-
-    @Override
-    public Cliente updateCliente(Cliente cliente) throws Exception{
-        return clienteDao.save(cliente);
-    }
-
-    @Override
-    public void deleteCliente(long id) throws Exception{
-        clienteDao.deleteById(id);
-    }
-    @Override
-    public Cliente newCliente(Cliente cliente ) throws Exception{
-       return clienteDao.save(cliente);
-    }
+    public ClienteServiceImpl(ClienteDao clienteDao) { super(clienteDao); }
 }

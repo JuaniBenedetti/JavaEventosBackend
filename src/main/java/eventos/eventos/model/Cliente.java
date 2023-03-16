@@ -1,29 +1,30 @@
-package eventos.eventos.Model;
+package eventos.eventos.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
-@Builder
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
-@Table(name ="clientes")
-//@JsonIdentityInfo(generator= ObjectIdGenerators.UUIDGenerator.class, property="@Id")
-public class Cliente extends Usuario{
+@NoArgsConstructor
+@Table(
+        name ="clientes",
+        uniqueConstraints = @UniqueConstraint(
+                name = "UQ_tipo_nro_documento",
+                columnNames = {"tipo_documento", "nro_documento"}
+        )
+)
+public class Cliente extends Persona {
+
+    @OneToOne
+    @JoinColumn(name = "id_usuario", foreignKey = @ForeignKey(name = "FK_clientes_usuarios"))
+    private Usuario usuario;
 
     @JsonBackReference
     @OneToMany(mappedBy = "cliente", cascade = {CascadeType.ALL})
-    private List<Evento> eventos = new ArrayList<>();
-
-//    @JsonBackReference
-//    @OneToMany(mappedBy = "tipoServicio", cascade = {CascadeType.ALL})
-//    private List<Servicio> servicios = new ArrayList<>();
+    private Set<Evento> eventos = new HashSet<>();
 }

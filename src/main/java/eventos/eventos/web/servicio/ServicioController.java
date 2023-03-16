@@ -1,20 +1,8 @@
-package eventos.eventos.Web.servicio;
+package eventos.eventos.web.servicio;
 
-import eventos.eventos.Model.Servicio;
-import org.springframework.web.bind.annotation.PathVariable;
+import eventos.eventos.model.Servicio;
+import eventos.eventos.web._CRUD.CRUDController;
 
-import java.util.List;
-
-public interface ServicioController {
-
-    Servicio saveTipoServicio(Servicio servicio) throws Exception;
-
-    Servicio updateTipoServicio(Servicio servicio) throws Exception;
-
-    Servicio findServicio(int idServicio) throws Exception;
-
-    void deleteServicio(int id) throws Exception;
-
-    List<Servicio> findAll() throws Exception;
+public interface ServicioController extends CRUDController<Servicio> {
 
 }

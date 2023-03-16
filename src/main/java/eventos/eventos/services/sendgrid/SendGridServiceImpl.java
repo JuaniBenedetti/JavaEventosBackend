@@ -46,7 +46,7 @@ public class SendGridServiceImpl implements SendGridService{
             System.out.println(response.getBody());
             System.out.println(response.getHeaders());
         } catch (IOException ex) {
-            throw ex;
+            throw new RuntimeException("No se pudo enviar email de verificación. " + ex.getMessage(), ex);
         }
     }
 

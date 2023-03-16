@@ -1,11 +1,8 @@
 package eventos.eventos.services.evento;
 
 import eventos.eventos.model.Evento;
+import eventos.eventos.services._CRUD.CRUDService;
 
-import java.util.List;
-
-public interface EventoService {
-
-    void deleteEventoById( long id) throws Exception;
+public interface EventoService extends CRUDService<Evento> {
 
 }

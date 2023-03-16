@@ -1,4 +1,4 @@
-package eventos.eventos.services.rolUsuarioDao;
+package eventos.eventos.services.rolUsuario;
 
 public interface rolUsuarioService {
 

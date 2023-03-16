@@ -1,18 +1,10 @@
-package eventos.eventos.Web.cliente;
+package eventos.eventos.web.cliente;
 
-import eventos.eventos.Model.Cliente;
-import org.springframework.web.bind.annotation.GetMapping;
+import eventos.eventos.model.Cliente;
+import eventos.eventos.web._CRUD.CRUDController;
 
 import java.util.List;
 
-public interface ClienteController {
-    List<Cliente> getClientes() throws Exception;
+public interface ClienteController extends CRUDController<Cliente> {
 
-    Cliente getCliente(long id) throws Exception;
-
-    Cliente updateCliente(Cliente cliente ) throws Exception;
-
-    void deleteCliente(long id)throws Exception;
-
-    Cliente newCliente(Cliente cliente) throws  Exception;
 }

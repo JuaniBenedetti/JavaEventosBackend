@@ -1,32 +1,28 @@
-package eventos.eventos.Model;
+package eventos.eventos.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import javax.validation.constraints.NotNull;
+import java.util.HashSet;
+import java.util.Set;
 
-@Builder
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
+@NoArgsConstructor
 @Table(name = "tipos_servicios")
-//@JsonIdentityInfo(generator= ObjectIdGenerators.UUIDGenerator.class, property="@Id")
 public class TipoServicio {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
-    private int idTipoServicio;
+    private Long idTipoServicio;
 
-    @Column
+    @NotNull
     private String denominacion;
 
     @JsonBackReference
     @OneToMany(mappedBy = "tipoServicio", cascade = {CascadeType.ALL})
-    private List<Servicio> servicios = new ArrayList<>();
+    private Set<Servicio> servicios = new HashSet<>();
 }

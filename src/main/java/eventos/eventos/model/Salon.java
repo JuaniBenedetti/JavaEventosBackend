@@ -1,36 +1,44 @@
-package eventos.eventos.Model;
+package eventos.eventos.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sun.istack.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
-@Builder
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
+@NoArgsConstructor
 @Table(name ="salones")
-// @JsonIdentityInfo(generator= ObjectIdGenerators.UUIDGenerator.class, property="@Id")
 public class Salon {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
-    private long idSalon;
+    private Long idSalon;
 
-    @Column
+    @NotNull
     private String denominacion;
 
-    @Column
-    private int capacidad;
+    @NotNull
+    private Integer capacidad;
 
-    @Column
+    @NotNull
+    private String calleDireccion;
+
+    @NotNull
+    private Integer numeroDireccion;
+
     private double costoPorDia;
 
+    private String nombreImagen;
+
+    @NotNull
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(
+            name = "id_administrativo",
+            nullable = false,
+            foreignKey = @ForeignKey(name = "FK_salones_administrativos"))
+    private Administrativo propietario;
 }
