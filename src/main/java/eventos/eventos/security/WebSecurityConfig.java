@@ -40,7 +40,7 @@ public class WebSecurityConfig {
         return http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/register", "/enable", "/**").permitAll()
+                .antMatchers("/register", "/enable").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()

@@ -29,6 +29,9 @@ public class Salon {
     @NotNull
     private Integer numeroDireccion;
 
+    @Column(length = 350)
+    private String descripcion;
+
     private double costoPorDia;
 
     private String nombreImagen;

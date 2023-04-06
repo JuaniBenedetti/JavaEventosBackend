@@ -15,10 +15,10 @@ public class UserDetailsImpl implements UserDetails {
 
     private final Usuario usuario;
 
+    public Usuario getUsuario() { return this.usuario; }
+
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.emptyList();
-    }
+    public Collection<? extends GrantedAuthority> getAuthorities() { return Collections.emptyList(); }
 
     @Override
     public String getPassword() {

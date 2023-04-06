@@ -38,7 +38,7 @@ public class Usuario {
     @Type(type = "true_false")
     private Boolean activo = false;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "roles_usuarios",
             joinColumns = @JoinColumn(

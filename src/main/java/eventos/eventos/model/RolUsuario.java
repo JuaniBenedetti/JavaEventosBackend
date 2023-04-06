@@ -1,5 +1,6 @@
 package eventos.eventos.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import eventos.eventos.model.enums.Rol;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,7 +22,4 @@ public class RolUsuario {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
     private Rol nombre;
-
-    @ManyToMany(mappedBy = "roles")
-    private Set<Usuario> usuario = new HashSet<>();
 }
