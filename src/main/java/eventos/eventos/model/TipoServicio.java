@@ -1,6 +1,6 @@
 package eventos.eventos.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -22,7 +22,7 @@ public class TipoServicio {
     @NotNull
     private String denominacion;
 
-    @JsonBackReference
-    @OneToMany(mappedBy = "tipoServicio", cascade = {CascadeType.ALL})
+    @JsonIgnore
+    @OneToMany(mappedBy = "tipoServicio")
     private Set<Servicio> servicios = new HashSet<>();
 }
