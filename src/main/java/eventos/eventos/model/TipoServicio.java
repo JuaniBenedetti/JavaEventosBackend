@@ -22,7 +22,7 @@ public class TipoServicio {
     @NotNull
     private String denominacion;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "tipoServicio")
-    private Set<Servicio> servicios = new HashSet<>();
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "tipoServicio")
+//    private Set<Servicio> servicios = new HashSet<>();
 }

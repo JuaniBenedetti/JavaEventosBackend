@@ -1,5 +1,6 @@
 package eventos.eventos.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ import java.util.Set;
 @Entity
 @NoArgsConstructor
 @Table(name ="eventos")
-public class Evento {
+public class Reserva {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,7 +28,6 @@ public class Evento {
     @NotNull
     private Integer cantidadPersonas;
 
-    @NotNull
     @ManyToOne
     @JoinColumn(
             name = "id_cliente",
@@ -45,7 +45,7 @@ public class Evento {
     )
     private Salon salon;
 
-    @ManyToMany()
+    @ManyToMany
     @JoinTable(
             name = "eventos_servicios",
             joinColumns = @JoinColumn(

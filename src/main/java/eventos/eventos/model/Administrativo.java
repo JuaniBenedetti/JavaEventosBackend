@@ -23,6 +23,6 @@ public class Administrativo extends Persona {
     @JoinColumn(name = "id_usuario", foreignKey = @ForeignKey(name = "FK_administrativos_usuarios"))
     private Usuario usuario;
 
-    @OneToMany(mappedBy = "propietario", cascade = {CascadeType.ALL})
-    private Set<Salon> salones = new HashSet<>();
+//    @OneToMany(mappedBy = "propietario", cascade = {CascadeType.ALL})
+//    private Set<Salon> salones = new HashSet<>();
 }

@@ -1,6 +1,7 @@
 package eventos.eventos.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -21,10 +22,10 @@ import java.util.Set;
 public class Cliente extends Persona {
 
     @OneToOne
+    @JsonIgnore
     @JoinColumn(name = "id_usuario", foreignKey = @ForeignKey(name = "FK_clientes_usuarios"))
     private Usuario usuario;
 
-    @JsonBackReference
-    @OneToMany(mappedBy = "cliente", cascade = {CascadeType.ALL})
-    private Set<Evento> eventos = new HashSet<>();
+//    @OneToMany(mappedBy = "cliente", cascade = {CascadeType.ALL})
+//    private Set<Reserva> reservas = new HashSet<>();
 }
