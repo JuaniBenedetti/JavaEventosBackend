@@ -7,5 +7,4 @@ import java.util.Set;
 
 public interface ReservaController extends CRUDController<Reserva> {
 
-    Set<Reserva> findAllByCliente() throws Exception;
 }

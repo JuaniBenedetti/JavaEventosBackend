@@ -2,6 +2,7 @@ package eventos.eventos.web.reserva;
 
 import eventos.eventos.model.Cliente;
 import eventos.eventos.model.Reserva;
+import eventos.eventos.model.enums.Rol;
 import eventos.eventos.security.UserDetailsImpl;
 import eventos.eventos.security.UserDetailsServiceImpl;
 import eventos.eventos.services.cliente.ClienteService;
@@ -14,6 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -41,17 +43,32 @@ public class ReservaControllerImpl extends CRUDControllerImpl<Reserva> implement
         return reservaService.save(reserva);
     }
 
+//    @Override
+//    @GetMapping("/findAllByCliente")
+//    public Set<Reserva> findAllByCliente() throws Exception {
+//        Cliente cliente = clienteActual();
+//        return reservaService.findAllByCliente(cliente);
+//    }
+
     @Override
-    @GetMapping("/findAllByCliente")
-    public Set<Reserva> findAllByCliente() throws Exception {
-        Cliente cliente = clienteActual();
-        return reservaService.findAllByCliente(cliente);
+    @GetMapping("/findAll")
+    public List<Reserva> findAll() throws Exception {
+        if (usuarioActual().getUsuario().getRoles().stream().anyMatch(rol -> rol.getNombre() == Rol.ROLE_OWNER))
+            return reservaService.findAll();
+        else {
+            Cliente cliente = clienteActual();
+            return reservaService.findAllByCliente(cliente);
+        }
+    }
+
+    private UserDetailsImpl usuarioActual() throws Exception {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl usuarioActual = userDetailsService.loadUserByUsername(authentication.getPrincipal().toString());
+        return usuarioActual;
     }
 
     private Cliente clienteActual() throws Exception {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetailsImpl usuarioActual = userDetailsService.loadUserByUsername(authentication.getPrincipal().toString());
-        Cliente cliente = clienteService.findByUsuario(usuarioActual.getUsuario());
+        Cliente cliente = clienteService.findByUsuario(usuarioActual().getUsuario());
         return cliente;
     }
 }

@@ -60,4 +60,6 @@ public class Reserva {
             )
     )
     private Set<Servicio> servicios = new HashSet<>();
+
+    private Double costoTotal;
 }

@@ -5,9 +5,10 @@ import eventos.eventos.model.Cliente;
 import eventos.eventos.model.Reserva;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
 import java.util.Set;
 
 public interface ReservaDao extends CRUDDao<Reserva> {
 
-    Set<Reserva> findAllByCliente(Cliente cliente) throws Exception;
+    List<Reserva> findAllByCliente(Cliente cliente) throws Exception;
 }

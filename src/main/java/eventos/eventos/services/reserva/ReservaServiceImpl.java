@@ -6,6 +6,7 @@ import eventos.eventos.model.Reserva;
 import eventos.eventos.services._CRUD.CRUDServiceImpl;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -19,7 +20,7 @@ public class ReservaServiceImpl extends CRUDServiceImpl<Reserva> implements Rese
     }
 
     @Override
-    public Set<Reserva> findAllByCliente(Cliente cliente) throws Exception {
+    public List<Reserva> findAllByCliente(Cliente cliente) throws Exception {
         return this.reservaDao.findAllByCliente(cliente);
     }
 }
