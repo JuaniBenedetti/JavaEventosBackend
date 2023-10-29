@@ -19,6 +19,7 @@ public abstract class CRUDControllerImpl<T> implements CRUDController<T>{
         return crudService.find(id);
     }
 
+    @Override
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
     public T save(@RequestBody @Valid T entity) throws Exception {

@@ -43,13 +43,6 @@ public class ReservaControllerImpl extends CRUDControllerImpl<Reserva> implement
         return reservaService.save(reserva);
     }
 
-//    @Override
-//    @GetMapping("/findAllByCliente")
-//    public Set<Reserva> findAllByCliente() throws Exception {
-//        Cliente cliente = clienteActual();
-//        return reservaService.findAllByCliente(cliente);
-//    }
-
     @Override
     @GetMapping("/findAll")
     public List<Reserva> findAll() throws Exception {

@@ -13,7 +13,7 @@ import java.util.Set;
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name ="eventos")
+@Table(name = "eventos")
 public class Reserva {
 
     @Id
