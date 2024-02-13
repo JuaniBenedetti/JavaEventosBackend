@@ -34,7 +34,7 @@ public class Reserva {
             nullable = false,
             foreignKey = @ForeignKey(name = "FK_eventos_clientes")
     )
-    private Cliente cliente ;
+    private Cliente cliente;
 
     @NotNull
     @ManyToOne
@@ -62,4 +62,11 @@ public class Reserva {
     private Set<Servicio> servicios = new HashSet<>();
 
     private Double costoTotal;
+
+    
+    public void setCostoTotal() {
+        this.costoTotal =
+                salon.getCostoPorDia() +
+                servicios.stream().map(s -> s.getCostoPorDia()).reduce((cpd1, cpd2) -> cpd1 + cpd2).orElse((double) 0);
+    }
 }

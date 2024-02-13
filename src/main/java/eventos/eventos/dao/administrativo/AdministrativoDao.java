@@ -6,5 +6,5 @@ import eventos.eventos.model.Usuario;
 
 public interface AdministrativoDao extends CRUDDao<Administrativo> {
 
-    Administrativo findByUsuario(Usuario usuario) throws Exception;
+    Administrativo findByUsuario(Usuario usuario);
 }

@@ -1,7 +1,9 @@
 package eventos.eventos.web.reserva;
 
+import eventos.eventos.exceptions.ReservaException;
 import eventos.eventos.model.Cliente;
 import eventos.eventos.model.Reserva;
+import eventos.eventos.model.Salon;
 import eventos.eventos.model.enums.Rol;
 import eventos.eventos.security.UserDetailsImpl;
 import eventos.eventos.security.UserDetailsServiceImpl;
@@ -15,6 +17,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Set;
 
@@ -38,14 +41,15 @@ public class ReservaControllerImpl extends CRUDControllerImpl<Reserva> implement
     @Override
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public Reserva save(@RequestBody @Valid Reserva reserva) throws Exception {
+    public Reserva save(@RequestBody @Valid Reserva reserva) throws ReservaException {
         reserva.setCliente(clienteActual());
+        reserva.setCostoTotal();
         return reservaService.save(reserva);
     }
 
     @Override
     @GetMapping("/findAll")
-    public List<Reserva> findAll() throws Exception {
+    public List<Reserva> findAll() {
         if (usuarioActual().getUsuario().getRoles().stream().anyMatch(rol -> rol.getNombre() == Rol.ROLE_OWNER))
             return reservaService.findAll();
         else {
@@ -54,13 +58,19 @@ public class ReservaControllerImpl extends CRUDControllerImpl<Reserva> implement
         }
     }
 
-    private UserDetailsImpl usuarioActual() throws Exception {
+    @Override
+    @GetMapping("/findFechasReservadas")
+    public Set<ZonedDateTime> findFechasReservadasByIdSalon(@RequestParam Long idSalon) {
+        return reservaService.findFechasReservadasByIdSalon(idSalon);
+    }
+
+    private UserDetailsImpl usuarioActual() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetailsImpl usuarioActual = userDetailsService.loadUserByUsername(authentication.getPrincipal().toString());
         return usuarioActual;
     }
 
-    private Cliente clienteActual() throws Exception {
+    private Cliente clienteActual() {
         Cliente cliente = clienteService.findByUsuario(usuarioActual().getUsuario());
         return cliente;
     }

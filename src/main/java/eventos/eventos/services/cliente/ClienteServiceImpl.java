@@ -17,7 +17,7 @@ public class ClienteServiceImpl extends CRUDServiceImpl<Cliente> implements Clie
     }
 
     @Override
-    public Cliente findByUsuario(Usuario usuario) throws Exception{
+    public Cliente findByUsuario(Usuario usuario) {
         return clienteDao.findByUsuario(usuario);
     }
 }

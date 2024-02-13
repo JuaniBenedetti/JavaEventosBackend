@@ -1,6 +1,7 @@
 package eventos.eventos.services.usuarioVerificacion;
 
 import eventos.eventos.dao.usuarioVerificacion.UsuarioVerificacionDao;
+import eventos.eventos.exceptions.UsuarioVerificacionException;
 import eventos.eventos.model.Usuario;
 import eventos.eventos.model.UsuarioVerificacion;
 import eventos.eventos.services.sendgrid.SendGridService;
@@ -21,7 +22,7 @@ public class UsuarioVerificacionServiceImpl implements UsuarioVerificacionServic
     private final SendGridService sendGridService;
 
     @Override
-    public UsuarioVerificacion saveUsuarioVerificacion(UsuarioVerificacion usuarioVerificacion) throws Exception {
+    public UsuarioVerificacion saveUsuarioVerificacion(UsuarioVerificacion usuarioVerificacion) {
         return usuarioVerificacionDao.save(usuarioVerificacion);
     }
 
@@ -40,7 +41,7 @@ public class UsuarioVerificacionServiceImpl implements UsuarioVerificacionServic
             user.setActivo(true);
         }
         else {
-            // Actualizo codigo y fechaHoraExpiracion del usuarioVerificacion.
+            // Actualizo codigo y fechaHoraExpiracion del usuarioVerificacion y reenvio email.
             usuarioVerificacionDao.saveAndFlush(
                     UsuarioVerificacion.builder()
                         .idUsuarioVerificacion(usuarioVerificacion.getIdUsuarioVerificacion())

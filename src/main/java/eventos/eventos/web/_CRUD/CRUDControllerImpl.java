@@ -3,6 +3,8 @@ package eventos.eventos.web._CRUD;
 import eventos.eventos.services._CRUD.CRUDService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;

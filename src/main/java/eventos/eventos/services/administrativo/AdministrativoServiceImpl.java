@@ -18,7 +18,7 @@ public class AdministrativoServiceImpl extends CRUDServiceImpl<Administrativo> i
     }
 
     @Override
-    public Administrativo findByUsuario(Usuario usuario) throws Exception {
+    public Administrativo findByUsuario(Usuario usuario) {
         return administrativoDao.findByUsuario(usuario);
     }
 }

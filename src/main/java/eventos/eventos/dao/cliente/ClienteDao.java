@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ClienteDao extends CRUDDao<Cliente> {
 
-    Cliente findByUsuario(Usuario usuario) throws Exception;
+    Cliente findByUsuario(Usuario usuario);
 }

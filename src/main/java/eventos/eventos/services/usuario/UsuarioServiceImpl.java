@@ -3,6 +3,7 @@ package eventos.eventos.services.usuario;
 import eventos.eventos.dao.usuario.UsuarioDao;
 import eventos.eventos.exceptions.UsuarioAlteradoException;
 import eventos.eventos.exceptions.UsuarioRegistradoException;
+import eventos.eventos.exceptions.UsuarioVerificacionException;
 import eventos.eventos.model.Usuario;
 import eventos.eventos.model.UsuarioVerificacion;
 import eventos.eventos.services.sendgrid.SendGridService;
@@ -45,6 +46,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     public ResponseEntity<String> activarUsuario(String email, String codigo) throws Exception {
         Usuario user = usuarioDao.findOneByEmail(email)
                 .orElseThrow(() -> new NoSuchElementException("No existe usuario registrado con el email ingresado."));
+        if(user.getActivo()) throw new UsuarioRegistradoException("El usuario ya ha sido activado.");
         if (usuarioVerificacionService.activarUsuario(user, codigo).getActivo()) {
             usuarioDao.save(user);
             return ResponseEntity.ok().build();
@@ -54,7 +56,7 @@ public class UsuarioServiceImpl implements UsuarioService {
                 .body("El código ingresado no es válido o ha expirado.");
     }
 
-    private void validarUsuario(Usuario usuario) throws Exception {
+    private void validarUsuario(Usuario usuario) throws UsuarioAlteradoException, UsuarioRegistradoException {
         // Valido que sólo se reciba username, password y email.
         if (usuario.getActivo() || !usuario.getRoles().isEmpty() || usuario.getIdUsuario() != null) {
             throw new UsuarioAlteradoException("El usuario a registrar viola las restricciones de seguridad.");

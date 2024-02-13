@@ -5,8 +5,8 @@ import java.util.List;
 public interface CRUDController<T> {
 
     T find(Long id) throws Exception;
-
     T save(T entity) throws Exception;
+
 
     T update(T entity) throws Exception;
 

@@ -6,6 +6,7 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
@@ -21,10 +22,12 @@ public class Usuario {
     private Long idUsuario;
 
     @NotNull
+    @NotEmpty
     @Column(nullable = false, unique = true)
     private String username;
 
     @NotNull
+    @NotEmpty
     @Column(nullable = false)
     private String password;
 

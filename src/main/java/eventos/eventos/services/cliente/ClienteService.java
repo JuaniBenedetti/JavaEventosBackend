@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface ClienteService extends CRUDService<Cliente> {
 
-    Cliente findByUsuario(Usuario usuario) throws Exception;
+    Cliente findByUsuario(Usuario usuario);
 }

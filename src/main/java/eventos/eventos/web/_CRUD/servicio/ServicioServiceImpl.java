@@ -1,4 +1,4 @@
-package eventos.eventos.services.servicio;
+package eventos.eventos.web._CRUD.servicio;
 
 import eventos.eventos.dao.servicio.ServicioDao;
 import eventos.eventos.model.Servicio;

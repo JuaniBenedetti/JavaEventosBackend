@@ -19,7 +19,7 @@ public class rolUsuarioServiceImpl implements rolUsuarioService {
 
     @Override
     @PostConstruct
-    public void actualizarRolesBD() throws Exception {
+    public void actualizarRolesBBDD() {
 
         final Logger log = LoggerFactory.getLogger(rolUsuarioServiceImpl.class);
 

@@ -1,7 +1,7 @@
 package eventos.eventos.web.servicio;
 
 import eventos.eventos.model.Servicio;
-import eventos.eventos.services.servicio.ServicioService;
+import eventos.eventos.web._CRUD.servicio.ServicioService;
 import eventos.eventos.web._CRUD.CRUDControllerImpl;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,5 +13,6 @@ public class ServicioControllerImpl extends CRUDControllerImpl<Servicio> impleme
     public ServicioControllerImpl(ServicioService servicioService) {
         super(servicioService);
     }
+
 }
 

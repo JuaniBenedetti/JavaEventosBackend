@@ -6,5 +6,5 @@ import eventos.eventos.services._CRUD.CRUDService;
 
 public interface AdministrativoService extends CRUDService<Administrativo> {
 
-    Administrativo findByUsuario(Usuario usuario) throws Exception;
+    Administrativo findByUsuario(Usuario usuario);
 }

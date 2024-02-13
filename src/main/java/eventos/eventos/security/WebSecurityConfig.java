@@ -1,11 +1,13 @@
 package eventos.eventos.security;
 
+import eventos.eventos.model.enums.Rol;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -41,6 +43,13 @@ public class WebSecurityConfig {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/register", "/enable").permitAll()
+                .antMatchers(
+                        "/salon/save", "salon/update", "/salon/delete",
+                        "/servicio/save", "/servicio/update", "/servicio/delete",
+                        "/tipoServicio/save", "/tipoServicio/update", "/tipoServicio/delete",
+                        "/reserva/update", "/cliente/**"
+                ).hasAnyRole(Rol.ROLE_OWNER.name(), Rol.ROLE_ADMIN.name())
+                .antMatchers().hasAnyRole()
                 .anyRequest()
                 .authenticated()
                 .and()

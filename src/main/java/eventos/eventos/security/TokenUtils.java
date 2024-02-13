@@ -1,28 +1,31 @@
 package eventos.eventos.security;
 
 import eventos.eventos.model.RolUsuario;
+import eventos.eventos.model.enums.Rol;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collections;
-import java.util.Date;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class TokenUtils {
 
-    //TODO UBICAR EN PROPERTIES Y CAMBIAR VALIDITY
-    private final static String ACCESS_TOKEN_SECRET = "pruebaCAMBIAR";
+    private final static String ACCESS_TOKEN_SECRET = "$2a$12$pdDepYJQHDdnDqtwXlVmQeyo0uu9v8mLLzzx/Vadz..QBZfOCm2sG";
     private final static Long ACCESS_TOKEN_VALIDITY_SECONDS = 2_592_000L;
 
     public static String createToken(UserDetailsImpl user) {
         long expirationTime = ACCESS_TOKEN_VALIDITY_SECONDS * 1_000;
         Date expirationDate = new Date(System.currentTimeMillis() + expirationTime);
 
-        Set<RolUsuario> roles = user.getUsuario().getRoles();
+        Set<String> roles = user.getUsuario().getRoles().stream()
+                .map(rolUsuario -> rolUsuario.getNombre().name())
+                .collect(Collectors.toSet());
 
         return Jwts.builder()
                 .setSubject(user.getUsername())
@@ -41,7 +44,13 @@ public class TokenUtils {
 
             String username = claims.getSubject();
 
-            return new UsernamePasswordAuthenticationToken(username, null, Collections.emptyList());
+            ArrayList<String> roles = (ArrayList<String>) claims.get("roles");
+
+            Set<GrantedAuthority> authorities = roles.stream()
+                    .map(r -> new SimpleGrantedAuthority("ROLE_" + r))
+                    .collect(Collectors.toSet());
+
+            return new UsernamePasswordAuthenticationToken(username, null, authorities);
         }
         catch (JwtException e) {
             return null;
