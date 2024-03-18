@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public class TokenUtils {
 
     private final static String ACCESS_TOKEN_SECRET = "$2a$12$pdDepYJQHDdnDqtwXlVmQeyo0uu9v8mLLzzx/Vadz..QBZfOCm2sG";
-    private final static Long ACCESS_TOKEN_VALIDITY_SECONDS = 2_592_000L;
+    private final static Long ACCESS_TOKEN_VALIDITY_SECONDS = 3_600L;
 
     public static String createToken(UserDetailsImpl user) {
         long expirationTime = ACCESS_TOKEN_VALIDITY_SECONDS * 1_000;
