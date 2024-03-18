@@ -4,5 +4,5 @@ import eventos.eventos.exceptions.UsuarioVerificacionException;
 
 public interface SendGridService {
 
-    void sendVerificationMail(String emailTo, String code) throws Exception;
+    void sendVerificationMail(String emailTo, String code) throws UsuarioVerificacionException;
 }

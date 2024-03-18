@@ -35,7 +35,7 @@ public class UsuarioVerificacionServiceImpl implements UsuarioVerificacionServic
     @Override
     public Usuario activarUsuario(Usuario user, String codigo) throws Exception {
         UsuarioVerificacion usuarioVerificacion = usuarioVerificacionDao.findByUsuario(user)
-                .orElseThrow(() -> new NoSuchElementException("No existe un código de verificación para el usuario."));
+                .orElseThrow(() -> new NoSuchElementException("No existe un código de verificación para la cuenta"));
         if (ZonedDateTime.now().isBefore(usuarioVerificacion.getFechaHoraExpiracion()) &&
             usuarioVerificacion.getCodigo().equals(codigo)) {
             user.setActivo(true);

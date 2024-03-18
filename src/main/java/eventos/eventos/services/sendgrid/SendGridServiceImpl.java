@@ -16,7 +16,7 @@ public class SendGridServiceImpl implements SendGridService{
 
     @Override
     public void sendVerificationMail(String emailTo, String code) throws UsuarioVerificacionException {
-        Email from = new Email("eplanner.info@gmail.com");
+        Email from = new Email("info.eplanner@gmail.com");
         String subject = "EPlanner - Verificación de cuenta";
         Email to = new Email(emailTo);
 
@@ -24,7 +24,7 @@ public class SendGridServiceImpl implements SendGridService{
 
         Personalization personalization = new Personalization();
         personalization.addSubstitution("{{code}}", code);
-        personalization.addSubstitution("{{{unsubscribe}}}", "https://trollface.dk/");
+        personalization.addSubstitution("{{{unsubscribe}}}", "https://google.com/");
         personalization.addTo(to);
 
         Mail mail = new Mail();
