@@ -3,17 +3,16 @@ package eventos.eventos.services.sendgrid;
 import com.sendgrid.*;
 import eventos.eventos.exceptions.UsuarioVerificacionException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.DefaultResourceLoader;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ResourceUtils;
+import org.springframework.util.FileCopyUtils;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.nio.charset.StandardCharsets;
 
 @Service
 @RequiredArgsConstructor
@@ -52,8 +51,10 @@ public class SendGridServiceImpl implements SendGridService{
 
     private static String readFile(String fileName) throws UsuarioVerificacionException {
         try {
-            File file = ResourceUtils.getFile("classpath:sendgrid/" + fileName);
-            return new String(Files.readAllBytes(file.toPath()));
+            ResourceLoader resourceLoader = new DefaultResourceLoader();
+            Resource resource = resourceLoader.getResource("classpath:sendgrid/" + fileName);
+            Reader reader = new InputStreamReader(resource.getInputStream(), StandardCharsets.UTF_8);
+            return FileCopyUtils.copyToString(reader);
         } catch (IOException exception) {
             throw new UsuarioVerificacionException("No se pudo leer la plantilla del email de verificación de usuario.");
         }
