@@ -25,7 +25,7 @@ public class SendGridServiceImpl implements SendGridService{
         String subject = "EPlanner - Verificación de cuenta";
         Email to = new Email(emailTo);
 
-        Content content = new Content("text/html", readFile("Eplanner.html"));
+        Content content = new Content("text/html", readFile("EPlanner.html"));
 
         Personalization personalization = new Personalization();
         personalization.addSubstitution("{{code}}", code);

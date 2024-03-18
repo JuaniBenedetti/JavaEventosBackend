@@ -1,5 +1,6 @@
 package eventos.eventos.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -18,6 +19,7 @@ import javax.persistence.*;
 public class Administrativo extends Persona {
 
     @OneToOne
+    @JsonIgnore
     @JoinColumn(name = "id_usuario", foreignKey = @ForeignKey(name = "FK_administrativos_usuarios"))
     private Usuario usuario;
 

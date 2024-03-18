@@ -38,7 +38,6 @@ public class Salon {
 
     @NotNull
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(
             name = "id_administrativo",
             nullable = false,
