@@ -53,9 +53,7 @@ public class SendGridServiceImpl implements SendGridService{
     private static String readFile(String fileName) throws UsuarioVerificacionException {
         try {
             File file = ResourceUtils.getFile("classpath:sendgrid/" + fileName);
-            InputStream in = new FileInputStream(file);
-            var fileBytes = in.readAllBytes();
-            return new String(fileBytes);
+            return new String(Files.readAllBytes(file.toPath()));
         } catch (IOException exception) {
             throw new UsuarioVerificacionException("No se pudo leer la plantilla del email de verificación de usuario.");
         }
