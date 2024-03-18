@@ -1,12 +1,8 @@
 package eventos.eventos.dao.servicio;
 
-import eventos.eventos.Model.Servicio;
-import org.springframework.data.jpa.repository.JpaRepository;
-import java.util.List;
+import eventos.eventos.dao._CRUD.CRUDDao;
+import eventos.eventos.model.Servicio;
 
-public interface ServicioDao extends JpaRepository<Servicio, Integer> {
-
-    Servicio findById(int idServicio);
-
-    Servicio findByDenominacion( String denominacion);
+public interface ServicioDao extends CRUDDao<Servicio> {
+    
 }

@@ -1,9 +1,8 @@
 package eventos.eventos.dao.tipoServicio;
 
-import eventos.eventos.Model.TipoServicio;
-import org.springframework.data.jpa.repository.JpaRepository;
+import eventos.eventos.dao._CRUD.CRUDDao;
+import eventos.eventos.model.TipoServicio;
 
-public interface TipoServicioDao extends JpaRepository<TipoServicio, Integer> {
+public interface TipoServicioDao extends CRUDDao<TipoServicio> {
 
-    TipoServicio findById(int idTipoServicio);
 }
