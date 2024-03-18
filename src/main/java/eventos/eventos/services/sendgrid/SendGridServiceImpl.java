@@ -4,6 +4,7 @@ import com.sendgrid.*;
 import eventos.eventos.exceptions.UsuarioVerificacionException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -47,7 +48,9 @@ public class SendGridServiceImpl implements SendGridService{
 
     private static String readFile(String fileName) throws UsuarioVerificacionException {
         try {
-            return new String(Files.readAllBytes(Paths.get("src/main/resources/sendgrid/" + fileName)));
+            ClassPathResource resource = new ClassPathResource("sendgrid/" + fileName);
+            byte[] fileBytes = Files.readAllBytes(Paths.get(resource.getURI()));
+            return new String(fileBytes);
         } catch (IOException exception) {
             throw new UsuarioVerificacionException("No se pudo leer la plantilla del email de verificación de usuario.");
         }
