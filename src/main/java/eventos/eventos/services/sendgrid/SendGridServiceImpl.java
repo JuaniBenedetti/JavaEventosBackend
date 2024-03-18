@@ -6,8 +6,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ResourceUtils;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -48,8 +52,9 @@ public class SendGridServiceImpl implements SendGridService{
 
     private static String readFile(String fileName) throws UsuarioVerificacionException {
         try {
-            ClassPathResource resource = new ClassPathResource("sendgrid/" + fileName);
-            byte[] fileBytes = Files.readAllBytes(Paths.get(resource.getURI()));
+            File file = ResourceUtils.getFile("classpath:sendgrid/" + fileName);
+            InputStream in = new FileInputStream(file);
+            var fileBytes = in.readAllBytes();
             return new String(fileBytes);
         } catch (IOException exception) {
             throw new UsuarioVerificacionException("No se pudo leer la plantilla del email de verificación de usuario.");
