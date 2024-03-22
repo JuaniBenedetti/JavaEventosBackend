@@ -25,6 +25,7 @@ public class UsuarioControllerImpl implements UsuarioController{
     @ResponseStatus(HttpStatus.CREATED)
     public Usuario registrar(@RequestBody @Valid UsuarioClienteDTO usuarioClienteDTO) throws Exception {
         var usuario = usuarioService.registrar(usuarioClienteDTO.getUsuario());
+        usuarioClienteDTO.getCliente().setUsuario(usuario);
         clienteService.save(usuarioClienteDTO.getCliente());
         return usuario;
     }
