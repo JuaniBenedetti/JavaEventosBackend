@@ -28,7 +28,7 @@ public class SendGridServiceImpl implements SendGridService{
 
         Personalization personalization = new Personalization();
         personalization.addSubstitution("{{code}}", code);
-        personalization.addSubstitution("{{{unsubscribe}}}", "https://eventosjava.web.app");
+        personalization.addSubstitution("{{{unsubscribe}}}", "https://trollface.dk/");
         personalization.addTo(to);
 
         Mail mail = new Mail();
