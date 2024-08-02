@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>eventos</groupId>
 	<artifactId>eventos</artifactId>
-	<version>0.0.4-SNAPSHOT</version>
+	<version>0.0.5-SNAPSHOT</version>
 	<name>eventos</name>
 	<description>tpfacujava</description>
 	<properties>
