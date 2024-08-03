@@ -50,7 +50,7 @@ public class ReservaControllerImpl extends CRUDControllerImpl<Reserva> implement
     @Override
     @GetMapping("/findAll")
     public List<Reserva> findAll() {
-        if (usuarioActual().getUsuario().getRoles().stream().anyMatch(rol -> rol.getNombre() == Rol.ROLE_OWNER))
+        if (usuarioActual().getUsuario().getRoles().stream().anyMatch(rol -> rol.getNombre() == Rol.ROLE_ADMIN))
             return reservaService.findAll();
         else {
             Cliente cliente = clienteActual();
